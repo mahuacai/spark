@@ -322,9 +322,9 @@ abstract class RDD[T: ClassTag](
    */
   def map[U: ClassTag](f: T => U): RDD[U] = withScope {
     val cleanF = sc.clean(f)
-    logInfo("+++++++++++++++++++++++")
-    logInfo("clean fun Info"+cleanF.toString())
-    logInfo("+++++++++++++++++++++++")
+    logError("+++++++++++++++++++++++")
+    logError("clean fun Info"+cleanF.toString())
+    logError("+++++++++++++++++++++++")
     new MapPartitionsRDD[U, T](this, (context, pid, iter) => iter.map(cleanF))
   }
 
