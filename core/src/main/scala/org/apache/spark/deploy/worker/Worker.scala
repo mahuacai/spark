@@ -690,7 +690,12 @@ private[deploy] object Worker extends Logging {
     val conf = new SparkConf
     val args = new WorkerArguments(argStrings, conf)
     logInfo("+++++++++++++++++++++++++")
-    logInfo(s"start work =>${args.host},${args.port},${args.webUiPort},${args.cores},${args.memory},${args.masters.toString},${args.masters},${args.workDir}")
+    var i = 0
+    for (ss<-argStrings){
+      i = i+1
+      logInfo(s"$i.$ss")
+    }
+    logInfo(s"start work =>${args.host},${args.port},${args.webUiPort},${args.cores},${args.memory}")
     logInfo("+++++++++++++++++++++++++")
     val rpcEnv = startRpcEnvAndEndpoint(args.host, args.port, args.webUiPort, args.cores,
       args.memory, args.masters, args.workDir, conf = conf)
